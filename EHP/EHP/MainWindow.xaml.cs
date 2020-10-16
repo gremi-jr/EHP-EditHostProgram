@@ -26,12 +26,11 @@ namespace EHP
     /// </summary>
     public partial class MainWindow : Window
     {
-        
 
-
-       private List<string> listApplication = new List<string>();
-       private List<string> listIPs = new List<string>();
-       private List<string> listDescription = new List<string>();
+        private string PathToHostFile = "C:\\Windows\\System32\\drivers\\etc\\hosts";
+        private List<string> ListApplication = new List<string>();
+        private List<string> ListIPs = new List<string>();
+        private List<string> ListDescription = new List<string>();
 
         private bool AlreadyHasEntry = false;
 
@@ -50,14 +49,14 @@ namespace EHP
                 while ((line = reader.ReadLine()) != null)
                 {
                     var values = line.Split(';');
-                    listApplication.Add(values[0]);
-                    listIPs.Add(values[1]);
-                    listDescription.Add(values[2]);
+                    ListApplication.Add(values[0]);
+                    ListIPs.Add(values[1]);
+                    ListDescription.Add(values[2]);
                 }
 
                 
                 //Add applications to combobox
-                foreach (var applicationItem in listApplication)
+                foreach (var applicationItem in ListApplication)
                 {
                     //To check if combobox already have the application
                     if (!(ComboBoxApplication.Items.Contains(applicationItem.ToString().ToUpper())))
@@ -76,7 +75,7 @@ namespace EHP
             }
             else
             {
-                string[] ContentOfHostFile = System.IO.File.ReadAllLines("C:\\Windows\\System32\\drivers\\etc\\hosts");
+                string[] ContentOfHostFile = System.IO.File.ReadAllLines(PathToHostFile);
                 var ListOfContent = new List<string>(ContentOfHostFile);
 
                 for (int i = 0; i < ListOfContent.Count; i++)
@@ -105,8 +104,17 @@ namespace EHP
                     }
 
                 }
-                System.IO.File.WriteAllLines("C:\\Windows\\System32\\drivers\\etc\\hosts", ListOfContent);
-                MessageBox.Show("Changes successfully made!", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                try
+                {
+                    System.IO.File.WriteAllLines(PathToHostFile, ListOfContent);
+                    
+                    MessageBox.Show("Changes successfully made!", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (System.UnauthorizedAccessException)
+                {
+                    MessageBox.Show("Unauthorized access! Please restart the application as administrator!", "Unauthorized access!", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 
@@ -114,9 +122,9 @@ namespace EHP
         {
             if (!(ComboBoxSystem.SelectedIndex == -1))
             {
-                int IndexOfDescription = listDescription.IndexOf(ComboBoxSystem.SelectedItem.ToString());
+                int IndexOfDescription = ListDescription.IndexOf(ComboBoxSystem.SelectedItem.ToString());
 
-                LabelSystemDescription.Content = listIPs[IndexOfDescription];
+                LabelSystemDescription.Content = ListIPs[IndexOfDescription];
             }
         }
 
@@ -127,11 +135,11 @@ namespace EHP
             //Reset of descrition so that after changing the application the description label is emty
             LabelSystemDescription.Content = "";
 
-            for (int i=0; i <= listApplication.Count-1; i++)
+            for (int i=0; i <= ListApplication.Count-1; i++)
             {
-                if (ComboBoxApplication.SelectedItem.ToString().ToLower() == listApplication[i])
+                if (ComboBoxApplication.SelectedItem.ToString().ToLower() == ListApplication[i])
                 {
-                    ComboBoxSystem.Items.Add(listDescription[i]);
+                    ComboBoxSystem.Items.Add(ListDescription[i]);
                 }
             }
         }
@@ -144,7 +152,7 @@ namespace EHP
             }
             else
             {
-                var ContentOfHostFile = System.IO.File.ReadAllLines("C:\\Windows\\System32\\drivers\\etc\\hosts");
+                var ContentOfHostFile = System.IO.File.ReadAllLines(PathToHostFile);
                 var ListOfContent = new List<string>(ContentOfHostFile);
 
                 for (int i = 0; i < ListOfContent.Count; i++)
@@ -154,9 +162,16 @@ namespace EHP
                         ListOfContent[i] = "";
                     }
                 }
-                System.IO.File.WriteAllLines("C:\\Windows\\System32\\drivers\\etc\\hosts", ListOfContent);
-                AlreadyHasEntry = false;
-                MessageBox.Show("Entries restored!", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
+                try
+                {
+                    System.IO.File.WriteAllLines(PathToHostFile, ListOfContent);
+                    AlreadyHasEntry = false;
+                    MessageBox.Show("Entries restored!", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch(System.UnauthorizedAccessException)
+                {
+                    MessageBox.Show("Unauthorized access! Please restart the application as administrator!", "Unauthorized access!", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 

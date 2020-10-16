@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EHP"
         mc:Ignorable="d"
-        Title="About!" Height="143.5" Width="375"
+        Title="EHP - About!" Height="143.5" Width="375"
         ResizeMode="CanMinimize" >
     <Grid Margin="0,0,0,-1">
         <Label Content="Developer: Timo Gremler" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
