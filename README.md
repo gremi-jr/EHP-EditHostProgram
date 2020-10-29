@@ -16,3 +16,6 @@ It needs to look something like this:
 The program will skip the first line, so you can use it as a comment line or leave it empty. <br>
 The first column of the config file will show in the application combo box. The third column will shown the different systems in the second combo box. <br>
 The ip address will show as a description. As soon you press change, the program get the application and the ip and set the entry like "ip_address application_name" in the hosts file.
+
+### Personal Notes
+- My first WPF tool.
