@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EHP"
         mc:Ignorable="d"
-        Title="EHP - Edit Host Program" Height="170" Width="375"
+        Title="EHP - Edit Host Program" Height="180" Width="424.333"
         ResizeMode="CanMinimize" >
 
     <Grid>
@@ -41,10 +41,11 @@
         <Label Name="LabelSystem" Content="System:" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" Width="110" Height="26" Margin="6,1,7,1"/>
         <Label Name="LabelDescription" Content="Description:" HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Center" Width="110" Height="26" Margin="6,1,7,1"/>
         <Label Name="LabelSystemDescription" Content="" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Center" Width="121" Height="26" Margin="9,1,10,1"/>
-
+        <Label Name="LabelHostname" Content="" Grid.Column="2" HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Center" Width="100" Height="26" Margin="10,3,10,1"/>
         <!--ComboBox-->
         <ComboBox Name="ComboBoxApplication" SelectionChanged="ComboBoxApplication_SelectionChanged"  Grid.Column="1" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Width="121" Height="22" Margin="9,3,10,3"/>
         <ComboBox Name="ComboBoxSystem" SelectionChanged="ComboBoxSystem_SelectionChanged" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" Width="121" Height="22" Margin="9,3,10,3"/>
+
 
     </Grid>
 </Window>

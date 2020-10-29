@@ -1,7 +1,7 @@
-application;connection_ip;connection_description
-application 1;123.123.123.123;Dev
-application 1;126.148.255.1;Test
-application 1;10.26.250.1;Prod
-application 2;123.123.123.123;Dev
-application 2;126.148.255.1;Test
-application 2;10.26.250.1;Prod
+application;connection_ip;connection_description;hostname
+application 1;123.123.123.123;Dev;Test1
+application 1;126.148.255.1;Test;Test2
+application 1;10.26.250.1;Prod;Test3
+application 2;123.123.123.123;Dev;Test4
+application 2;126.148.255.1;Test;Test5
+application 2;10.26.250.1;Prod;Test6

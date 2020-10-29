@@ -31,6 +31,7 @@ namespace EHP
         private List<string> ListApplication = new List<string>();
         private List<string> ListIPs = new List<string>();
         private List<string> ListDescription = new List<string>();
+        private List<string> ListHostname = new List<string>();
 
         private bool AlreadyHasEntry = false;
 
@@ -52,6 +53,7 @@ namespace EHP
                     ListApplication.Add(values[0]);
                     ListIPs.Add(values[1]);
                     ListDescription.Add(values[2]);
+                    ListHostname.Add(values[3]);
                 }
 
                 
@@ -83,24 +85,20 @@ namespace EHP
 
                     if (ListOfContent[i].Contains(ComboBoxApplication.SelectedItem.ToString().ToLower()))
                     {
-
                         AlreadyHasEntry = true;
-                        ListOfContent[i] = LabelSystemDescription.Content + " " + ComboBoxApplication.SelectedItem.ToString().ToLower();
-                        Console.WriteLine(AlreadyHasEntry);
+                        ListOfContent[i] = LabelSystemDescription.Content + " " + LabelHostname.Content.ToString().ToLower();
                     }
                 }
-                if (AlreadyHasEntry != true)
+                if (AlreadyHasEntry == false)
                 {
 
                     if (String.IsNullOrEmpty(ListOfContent[ListOfContent.Count - 1]))
                     {
-
-                        ListOfContent[ListOfContent.Count - 1] += LabelSystemDescription.Content + " " + ComboBoxApplication.SelectedItem.ToString().ToLower();
+                        ListOfContent[ListOfContent.Count - 1] += LabelSystemDescription.Content + " " + LabelHostname.Content.ToString().ToLower();
                     }
                     else
                     {
-
-                        ListOfContent.Add(LabelSystemDescription.Content + " " + ComboBoxApplication.SelectedItem.ToString().ToLower());
+                        ListOfContent.Add(LabelSystemDescription.Content + " " + LabelHostname.Content.ToString().ToLower());
                     }
 
                 }
@@ -125,6 +123,7 @@ namespace EHP
                 int IndexOfDescription = ListDescription.IndexOf(ComboBoxSystem.SelectedItem.ToString());
 
                 LabelSystemDescription.Content = ListIPs[IndexOfDescription];
+                LabelHostname.Content = ListHostname[IndexOfDescription];
             }
         }
 
@@ -148,7 +147,7 @@ namespace EHP
         {
             if (ComboBoxApplication.SelectedItem == null)
             {
-                MessageBox.Show("Please select a application!", "Select a Application", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Please select a application and the system!", "Select a Application", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {
@@ -157,7 +156,7 @@ namespace EHP
 
                 for (int i = 0; i < ListOfContent.Count; i++)
                 {
-                    if (ListOfContent[i].Contains(ComboBoxApplication.SelectedItem.ToString().ToLower()))
+                    if (ListOfContent[i].Contains(LabelHostname.Content.ToString().ToLower()))
                     {
                         ListOfContent[i] = "";
                     }
